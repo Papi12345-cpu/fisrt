@@ -1,1 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIRST TRAITEUR</title>
 
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; background:#f5f5f5; }
+
+/* HEADER */
+header { background: darkred; color:white; text-align:center; padding:20px; position:relative; }
+header h1 { font-size:2.5rem; animation: slideIn 1s ease-out; }
+@keyframes slideIn { from {transform: translateY(-50px); opacity:0;} to {transform: translateY(0); opacity:1;} }
+
+/* NAV */
+nav { background:black; display:flex; justify-content:center; gap:15px; padding:10px; flex-wrap:wrap; }
+nav a { color:white; padding:10px; border-radius:8px; cursor:pointer; text-decoration:none; }
+nav a.active, nav a:hover { background: darkred; }
+
+/* SECTIONS */
+section { display:none; padding:40px; text-align:center; }
+section.active { display:block; }
+
+/* ACCUEIL */
+#accueil { height:90vh; background:url('https://i.postimg.cc/XJdvtrgZ/Whats-App-Image-2026-04-08-at-15-47-01-(1).jpg') center/cover; position:relative; color:white; }
+#accueil::before { content:""; position:absolute; width:100%; height:100%; background:rgba(0,0,0,0.3); } 
+.accueil-content { position:relative; top:50%; transform:translateY(-50%); animation: fadeIn 2s ease-in; }
+.accueil-content h2 { font-size:3rem; margin-bottom:10px; }
+.accueil-content p { font-size:1.5rem; margin-bottom:20px; }
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+.message-dynamique { font-size:1.2rem; font-weight:bold; color:yellow; animation: blink 1.2s infinite; }
+@keyframes blink { 0%,50%,100% {opacity:1;} 25%,75% {opacity:0;} }
+
+/* MENU */
+.menu-container { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+.menu { background:white; width:250px; padding:15px; border-radius:10px; transition:0.3s; cursor:pointer; }
+.menu:hover { transform: scale(1.05); }
+.menu img { width:100%; border-radius:10px; }
+button { margin-top:10px; padding:10px 15px; border:none; border-radius:8px; background:darkred; color:white; cursor:pointer; }
+
+/* PANIER */
+#panier { background:white; padding:20px; margin-top:20px; border-radius:10px; }
+
+/* WHATSAPP */
+.whatsapp { position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px; border-radius:50%; font-size:20px; cursor:pointer; }
+
+/* A PROPOS */
+#apropos { display:flex; flex-direction:column; align-items:center; gap:20px; }
+#apropos img { width:80%; max-width:600px; border-radius:10px; margin-top:20px; }
+#apropos .apropos-text { max-width:800px; text-align:center; font-size:1.2rem; color:#333; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🍽️ FIRST TRAITEUR</h1>
+<p class="message-dynamique">Découvrez nos plats savoureux du Sénégal et d'Europe. Commandez en un clic !</p>
+</header>
+
+<nav>
+<a class="tab-link active" data-tab="accueil">Accueil</a>
+<a class="tab-link" data-tab="senegal">Plats Sénégalais</a>
+<a class="tab-link" data-tab="europe">Plats Européens</a>
+<a class="tab-link" data-tab="evenements">Événements & Cérémonies</a>
+<a class="tab-link" data-tab="apropos">À propos</a>
+<a class="tab-link" data-tab="panierTab">🛒 Panier</a>
+</nav>
+
+<!-- ACCUEIL -->
+<section id="accueil" class="active">
+<div class="accueil-content">
+<h2>Bienvenue 🍽️</h2>
+<p>Commandez vos plats préférés en quelques clics !</p>
+<button onclick="goTab('senegal')">Voir menu Sénégalais</button>
+<button onclick="goTab('europe')">Voir menu Européen</button>
+</div>
+</section>
+
+<!-- SENEGAL -->
+<section id="senegal">
+<h2>🇸🇳 Plats Sénégalais</h2>
+<div class="menu-container">
+
+<div class="menu"><img src="https://i.pinimg.com/originals/9a/7a/3e/9a7a3e9d592f0fe863e19e4ad51f52b6.jpg"><h3>Thieboudienne bou khonk</h3><p>2500</p><button onclick="addPanier('Thieboudienne bou khonk',2500)">Ajouter</button></div>
+
+<div class="menu"><img src="https://lesgourmandisesdekarelle.com/wp-content/uploads/2016/08/Yassa-21-1024x683.jpg"><h3>Yassa</h3><p>2000</p><button onclick="addPanier('Yassa',2000)">Ajouter</button></div>
+
+<div class="menu"><img src="https://i0.wp.com/africa-cuisine.com/wp-content/uploads/2022/10/poulet-mafe-senegalais-sauce-arachide.jpg"><h3>Mafé</h3><p>2000</p><button onclick="addPanier('Mafé',2000)">Ajouter</button></div>
+
+<div class="menu"><img src="https://thumbs.dreamstime.com/z/domoda-delicious-peanut-stew-national-dish-gambia-close-up-plate-vertical-top-view-table-above-174053554.jpg"><h3>Domoda</h3><p>2200</p><button onclick="addPanier('Domoda',2200)">Ajouter</button></div>
+
+<div class="menu"><img src="https://afromomspices.com/wp-content/uploads/2023/02/thiakry-with-fruits.jpg"><h3>Thiakry</h3><p>1500</p><button onclick="addPanier('Thiakry',1500)">Ajouter</button></div>
+
+<div class="menu"><img src="https://i.pinimg.com/200x150/bd/a3/51/bda351508336d9da0c3214120a51c984.jpg"><h3>Thieboudienne bou wekh</h3><p>2500</p><button onclick="addPanier('Thieboudienne bou wekh',2500)">Ajouter</button></div>
+
+<div class="menu"><img src="https://afriseries.com/wp-content/uploads/2021/07/guinar-thiebe-e1627562684192.jpg"><h3>Paella</h3><p>2000</p><button onclick="addPanier('Paella',2000)">Ajouter</button></div>
+
+<div class="menu"><img src="https://dakarfooddelivery.com/uploads/menu/Thiou-Curry-fr1679074147.jpg"><h3>Thiou kary</h3><p>2000</p><button onclick="addPanier('Thiou kary',2000)">Ajouter</button></div>
+
+<div class="menu"><img src="https://i.ytimg.com/vi/c87viIci5uc/maxresdefault.jpg"><h3>Mbakhal</h3><p>2200</p><button onclick="addPanier('Mbakhal',2200)">Ajouter</button></div>
+
+<div class="menu"><img src="https://i.pinimg.com/originals/2e/85/45/2e8545f06deebcc58ed00a9763a54c71.jpg"><h3>Soupou kandja</h3><p>1500</p><button onclick="addPanier('Soupou kandja',1500)">Ajouter</button></div>
+
+<div class="menu"><img src="https://www.linfodrome.com/media/article/images/thumb/50711-5dbeee9146d01cf0cebdd118584de387_xl.webp"><h3>Lakh</h3><p>1800</p><button onclick="addPanier('Lakh',1800)">Ajouter</button></div>
+
+</div>
+</section>
+
+<!-- EUROPE -->
+<section id="europe">
+<h2>🇪🇺 Plats Européens</h2>
+<div class="menu-container">
+
+<div class="menu"><img src="https://delice2rabat.wordpress.com/wp-content/uploads/2023/01/img-20210118-wa0088-01.jpeg"><h3>Plateaux salés</h3><p>3000</p><button onclick="addPanier('Plateaux salés',3000)">Ajouter</button></div>
+
+<div class="menu"><img src="https://shopsuki.ph/cdn/shop/collections/Classic_Burger_1024x.jpg?v=1644488722"><h3>Burger</h3><p>2500</p><button onclick="addPanier('Burger',2500)">Ajouter</button></div>
+
+<div class="menu"><img src="https://cuisineinspirante.com/wp-content/uploads/2024/01/salade-fraiche.jpg"><h3>Salade fraîche</h3><p>2800</p><button onclick="addPanier('Salade fraîche',2800)">Ajouter</button></div>
+
+<div class="menu"><img src="https://assets.unileversolutions.com/recipes-v2/238035.jpg"><h3>Tortilla</h3><p>2000</p><button onclick="addPanier('Tortilla',2000)">Ajouter</button></div>
+
+<div class="menu"><img src="https://media.scoolinary.app/blog/images/2022/12/croissant.jpg"><h3>Croissant</h3><p>1200</p><button onclick="addPanier('Croissant',1200)">Ajouter</button></div>
+
+</div>
+</section>
+
+<!-- EVENEMENTS -->
+<section id="evenements">
+<h2>🎉 Événements & Cérémonies</h2>
+<p>Nous organisons vos événements : mariage, baptême, anniversaire, pause café...</p>
+
+<div class="menu-container">
+
+<div class="menu" onclick="contactEvent('Baptême')">
+<img src="https://i.postimg.cc/YqCbfpsg/Whats-App-Image-2026-04-09-at-00-49-53.jpg">
+<h3>Baptême</h3>
+</div>
+
+<div class="menu" onclick="contactEvent('Mariage')">
+<img src="https://i.postimg.cc/c4LXMsbn/Whats-App-Image-2026-04-09-at-00-49-53-(1).jpg">
+<h3>Mariage</h3>
+</div>
+
+<div class="menu" onclick="contactEvent('Pause café')">
+<img src="https://i.postimg.cc/gk2NqYTL/Whats-App-Image-2026-04-09-at-00-49-53-(2).jpg">
+<h3>Pause café</h3>
+</div>
+
+<div class="menu" onclick="contactEvent('Anniversaire')">
+<img src="https://www.mariage.com/wp-content/uploads/2015/05/salle-de-reception-pour-un-mariage.jpg">
+<h3>Anniversaire</h3>
+</div>
+
+<div class="menu" onclick="contactEvent('Séminaire')">
+<img src="https://intense-dmc.com/wp-content/uploads/2019/11/etape-organisation-seminaire.jpg">
+<h3>Séminaire</h3>
+</div>
+
+</div>
+</section>
+
+<!-- A PROPOS -->
+<section id="apropos">
+<h2>À propos</h2>
+
+<div class="apropos-text">
+<p>Chez FIRST TRAITEUR, nous croyons que chaque repas est une expérience unique. Notre passion est de vous offrir des plats délicieux, faits avec amour et savoir-faire, pour créer des moments inoubliables avec vos proches. Laissez-vous tenter et savourez la qualité et la tradition dans chaque bouchée !</p>
+<img src="https://i.postimg.cc/XJdvtrgZ/Whats-App-Image-2026-04-08-at-15-47-01-(1).jpg">
+</div>
+</section>
+
+<!-- PANIER -->
+<section id="panierTab">
+<h2>Panier</h2>
+<div id="panier"></div>
+<h3 id="total"></h3>
+<button onclick="commanderWhatsApp()">Commander</button>
+</section>
+
+<div class="whatsapp" onclick="commanderWhatsApp()">💬</div>
+
+<script>
+const links=document.querySelectorAll('.tab-link');
+const sections=document.querySelectorAll('section');
+
+links.forEach(link=>{
+link.onclick=()=>{
+links.forEach(l=>l.classList.remove('active'));
+sections.forEach(s=>s.classList.remove('active'));
+link.classList.add('active');
+document.getElementById(link.dataset.tab).classList.add('active');
+}
+});
+
+function goTab(tab){document.querySelector(`[data-tab="${tab}"]`).click();}
+
+let panier=[];let total=0;
+
+function addPanier(nom,prix){
+panier.push({nom,prix});
+total+=prix;
+afficherPanier();
+}
+
+function afficherPanier(){
+let html="";
+panier.forEach(p=>{html+=`<p>${p.nom} - ${p.prix} FCFA</p>`});
+document.getElementById('panier').innerHTML=html;
+document.getElementById('total').innerText="Total : "+total+" FCFA";
+}
+
+function commanderWhatsApp(){
+let message="Commande:%0A";
+panier.forEach(p=>{message+=p.nom+" - "+p.prix+" FCFA%0A"});
+message+="Total: "+total+" FCFA";
+window.open(`https://wa.me/221764307031?text=${message}`);
+}
+
+function contactEvent(type){
+let message=`Bonjour, je suis intéressé par ${type}`;
+window.open("https://wa.me/221764307031?text="+encodeURIComponent(message));
+}
+</script>  
+
+</body>
+</html>
